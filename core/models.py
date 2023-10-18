@@ -10,7 +10,7 @@ class Keranjang(models.Model):
 
 class Produk(models.Model):
     nama_barang = models.CharField(max_length=100)
-    gambar = models.TextField()
+    gambar = models.ImageField(upload_to="item_images", null=True, blank=True)
     harga = models.PositiveIntegerField()
     jumlah = models.PositiveIntegerField()
 
