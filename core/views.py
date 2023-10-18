@@ -1,3 +1,5 @@
 from django.shortcuts import render
+from .models import Produk, Keranjang, Username
 
-# Create your views here.
+def index(request):
+    
