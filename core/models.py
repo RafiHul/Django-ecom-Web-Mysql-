@@ -12,6 +12,7 @@ class Keranjang(models.Model):
 class Produk(models.Model):
     nama_barang = models.CharField(max_length=100)
     gambar = models.ImageField(upload_to="item_images", null=True, blank=True)
+    deskripsi = models.TextField(blank=True,null=True)
     harga = models.PositiveIntegerField()
     jumlah = models.PositiveIntegerField()
     is_sold = models.BooleanField(default=False)
