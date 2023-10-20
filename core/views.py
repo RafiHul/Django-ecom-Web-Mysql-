@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Produk, Keranjang, Username
+from .models import Produk, Keranjang
 
 def index(request):
     produk = Produk.objects.all()

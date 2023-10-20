@@ -24,11 +24,3 @@ class Produk(models.Model):
 
     def __str__(self):
         return self.nama_barang
-
-class Username(models.Model):
-    username_akun = models.CharField(primary_key=True, max_length=100)
-    password_akun = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'username'

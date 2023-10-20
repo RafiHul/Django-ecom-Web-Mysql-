@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="max-w-screen-md mx-auto bg-white p-4 rounded-lg shadow-md">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="mb-4 md:mb-0 md:mr-4">
+                <img src="{{ profile.gambar.url }}" alt="{{ profile.gambar.url }}" class="w-24 h-24 rounded-full">
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold">Nama Anda</h2>
+                <p class="text-gray-600">Saldo Dompet: $500</p>
+            </div>
+        </div>
+        <div class="mt-6">
+            <a href="#" class="text-blue-500 hover:underline block mb-2">Pengaturan</a>
+            <a href="#" class="text-blue-500 hover:underline block mb-2">History</a>
+            <a href="#" class="text-blue-500 hover:underline block mb-2">Keranjang</a>
+            <a href="#" class="text-blue-500 hover:underline block">Barang yang Anda Jual</a>
+        </div>
+    </div>
+{%endblock%}
