@@ -9,8 +9,9 @@
                 <img src="{{ profile.gambar.url }}" alt="{{ profile.gambar.url }}" class="w-24 h-24 rounded-full">
             </div>
             <div>
-                <h2 class="text-xl font-semibold">Nama Anda</h2>
-                <p class="text-gray-600">Saldo Dompet: $500</p>
+                <h2 class="text-xl font-semibold">{{ profile.username_acc }}</h2>
+                <p class="text-gray-600">Saldo Dompet: {{profile.saldo}}</p>
+                <a href="{%url 'account:topup'%}" class="text-blue-500 hover:underline block mb-2">Topup</a>
             </div>
         </div>
         <div class="mt-6">
@@ -18,6 +19,7 @@
             <a href="#" class="text-blue-500 hover:underline block mb-2">History</a>
             <a href="#" class="text-blue-500 hover:underline block mb-2">Keranjang</a>
             <a href="#" class="text-blue-500 hover:underline block">Barang yang Anda Jual</a>
+            <a href="{% url 'account:logout' %}" class="text-white bg-red-500 hover:bg-red-600 rounded-md px-4 py-2 mt-4 inline-block">Logout</a>
         </div>
     </div>
 {%endblock%}
