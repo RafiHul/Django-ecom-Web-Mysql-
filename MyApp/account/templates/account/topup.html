@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-semibold mb-4">Top-Up Saldo</h1>
+<h1 class="text-lg font-semibold mb-2">Jumlah Saldo Anda Saat Ini : {{ form }}</h1>
+<form method="post" action="{% url 'account:topup' %}" id="form1">
+    {% csrf_token %}
+    <div class="mb-4">
+        <label for="saldo" class="block text-gray-700">Masukkan Jumlah Saldo Yang Ingin Di Tambahkan</label>
+        {{ form1.saldo }}
+    </div>
+    
+    <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-gray">Submit</button>
+</form>
+<div id="saldoWarning" class="text-red-500 mt-2 hidden">Jumlah saldo tidak boleh kurang dari 0.</div>
+
+<script>
+    const form1 = document.getElementById('form1');
+    const saldoInput = document.getElementById('id_saldo');
+    const saldoWarning = document.getElementById('saldoWarning');
+    form1.addEventListener('submit', (e) => {
+        if (saldoInput.value < 0) {
+            e.preventDefault();
+            saldoWarning.classList.remove('hidden'); // Menampilkan pesan peringatan
+        }
+    });
+
+    saldoInput.addEventListener('input', () => {
+        saldoWarning.classList.add('hidden');
+    });
+</script>
+
+{% endblock %}
