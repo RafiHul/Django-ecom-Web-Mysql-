@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import UserProfile
 
@@ -43,5 +43,15 @@ class TopupSaldo(forms.ModelForm):
     saldo = forms.IntegerField(min_value=0,widget=forms.TextInput(attrs={
         'placeholder': 'Masukkan jumlah saldo',
         'class': 'w-full border p-2 rounded-md'
+    }))
+
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ("username",)
+        
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Enter New Username',
+        'class': 'w-full py-4 px-6 rounded-xl'
     }))
 

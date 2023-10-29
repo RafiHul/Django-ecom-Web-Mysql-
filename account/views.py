@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
-from .forms import SignupForm, TopupSaldo
+from .forms import SignupForm, TopupSaldo, EditProfileForm
 from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -44,17 +44,11 @@ def topup(request):
         form = TopupSaldo(request.POST)
         if form.is_valid():
             saldo = form.cleaned_data['saldo']
-            
-            # Periksa apakah saldo positif
+
             if saldo > 0:
-                # Ambil objek UserProfile yang sesuai dengan user saat ini
                 user_profile = UserProfile.objects.get(username_acc=request.user)
-                
-                # Perbarui saldo pada objek UserProfile
                 user_profile.saldo += saldo
                 user_profile.save()
-                
-                # Redirect ke halaman profil
                 return redirect('account:profile')
             else:
                 messages.error(request, "Masukkan angka yang benar")
@@ -69,3 +63,18 @@ def topup(request):
         'form1': form,
     })
 
+def settings(request):
+    if request.method == "POST":
+        form = EditProfileForm(request.POST,instance=request.user)
+        
+        if form.is_valid():
+            form.save()
+
+            return redirect('account:profile')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+
+    return render(request, 'account/settings.html',{
+        'form':form,
+    })
