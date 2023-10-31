@@ -63,13 +63,18 @@ def topup(request):
         'form1': form,
     })
 
+@login_required
 def settings(request):
+    uss_prof = UserProfile.objects.get(username_acc=request.user)
     if request.method == "POST":
         form = EditProfileForm(request.POST,instance=request.user)
         
         if form.is_valid():
+            stored = form.cleaned_data['username']
+            print(stored)
+            uss_prof.username_acc = stored
             form.save()
-
+            uss_prof.save()
             return redirect('account:profile')
 
     else:
