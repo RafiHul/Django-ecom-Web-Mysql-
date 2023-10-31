@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
-from .forms import SignupForm, TopupSaldo, EditProfileForm
-from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+
+from .forms import SignupForm, TopupSaldo, EditProfileForm
+from .models import UserProfile
+
 
 def signup(request):
     if request.method == 'POST':
@@ -71,10 +73,7 @@ def settings(request):
         
         if form.is_valid():
             stored = form.cleaned_data['username']
-            print(stored)
-            uss_prof.username_acc = stored
             form.save()
-            uss_prof.save()
             return redirect('account:profile')
 
     else:

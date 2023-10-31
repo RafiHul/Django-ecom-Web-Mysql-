@@ -3,7 +3,7 @@ from django.contrib.auth.models import User as AuthUser
 
 
 class UserProfile(models.Model):
-    username_acc = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='username_acc', to_field='username')
+    username_acc = models.ForeignKey(AuthUser, on_delete=models.CASCADE, db_column='username_acc', to_field='username')
     gambar = models.ImageField(upload_to="profile_pic", default='profile_pic/default_pic.jpg')
     saldo = models.IntegerField(default=0, blank=True, null=True)
 
