@@ -29,11 +29,12 @@ class Cart(object):
         self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modifed = True
 
-    def add(self,produk_id,quantity=1,update_produk=False):
+    def add(self,produk_id,price,quantity=1,update_produk=False):
         produk_id = str(produk_id)
+        price = str(price)
 
         if produk_id not in self.cart:
-            self.cart[produk_id] = {'quantity':int(quantity),'id':produk_id}
+            self.cart[produk_id] = {'quantity':int(quantity),'id':produk_id,'price':price}
         elif update_produk:
             self.cart[produk_id]['quantity'] += int(quantity)
 
@@ -51,5 +52,6 @@ class Cart(object):
         for p in self.cart.keys():
             self.cart[str(p)]['product'] = Produk.objects.get(pk=p)
 
+        print(self.cart)
         return int(sum(item['product'].harga * item['quantity'] for item in self.cart.values()))/100
     

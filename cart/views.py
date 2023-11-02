@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from core.models import Produk
 
 
 from .cart import Cart
@@ -14,7 +15,9 @@ def cart_view(request):
 @login_required
 def add_cart(request,pk):
     cart = Cart(request)
-    mm = cart.add(produk_id=pk)
+    produk = get_object_or_404(Produk,pk=pk)
+    price = produk.harga
+    mm = cart.add(produk_id=pk,price=price)
     if mm:
         messages.success(request, 'Produk berhasil ditambahkan ke keranjang.')
     return redirect('cart:cart_view')
@@ -23,5 +26,5 @@ def add_cart(request,pk):
 def checkout(request,pk):
     cart = Cart(request)
     return render(request, 'cart/checkout.html',{
-        'cart':cart,
+        'qck': cart,
     })
