@@ -5,9 +5,10 @@ from .forms import NewItem, EditItem
 
 def detail(request,pk):
     produk = get_object_or_404(Produk,pk=pk)
-
+    q = produk.created_by
     return render(request, 'items/detail.html',{
         'produk': produk,
+        'q':q
     })
 
 @login_required

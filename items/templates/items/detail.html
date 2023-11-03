@@ -20,7 +20,7 @@
                     <p class="text-xl font-semibold">Harga: {{produk.harga}}</p>
                     <p class="text-xl font-semibold">Jumlah: {{produk.jumlah}}</p>
                     <div class="mt-4">
-                        <p class="text-gray-600">Dijual oleh: <span class="text-blue-500">{{produk.created_by}}</span></p>
+                        <p class="text-gray-600">Dijual oleh: <a href="{% url 'account:another_profile' produk.created_by %}" class="text-blue-500">{{ produk.created_by }}</a></p>
                     </div>
                 </div>
             </div>

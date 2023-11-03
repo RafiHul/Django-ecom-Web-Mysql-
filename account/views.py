@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from .forms import SignupForm, TopupSaldo, EditProfileForm
 from .models import UserProfile
+from core.models import Produk
 
 
 def signup(request):
@@ -81,4 +82,13 @@ def settings(request):
 
     return render(request, 'account/settings.html',{
         'form':form,
+    })
+
+def another_profile(request,user):
+    qck = get_object_or_404(UserProfile, username_acc=user)
+    gyat = User.objects.get(username=user)
+    ff = Produk.objects.filter(created_by=gyat)
+    return render(request, 'account/another_profile.html',{
+        'user':qck,
+        'created_by':ff,
     })

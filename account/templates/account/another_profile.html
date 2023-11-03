@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-screen-md mx-auto bg-white p-4 rounded-lg shadow-md">
+    <div class="flex flex-col md:flex-row items-center">
+        <div class="mb-4 md:mb-0 md:mr-4">
+            <img src="{{ user.gambar.url }}" alt="{{ user.gambar.url }}" class="w-24 h-24 rounded-full">
+        </div>
+        <div>
+            <h2 class="text-xl font-semibold">{{ user.username_acc }}</h2>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-xl font-semibold mt-6">Barang Yang Di Jual</h2> <!-- Pindahkan text ini ke atas item -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for item in created_by %}
+    <div class="bg-white p-4 shadow-md">
+        <a href="{% url 'items:detail' item.id %}">
+            <img src="{{ item.gambar.url }}" alt="{{ item.nama_barang }}" class="mx-auto mb-4">
+        </a>
+        <h2 class="text-xl font-semibold">{{ item.nama_barang }}</h2>
+        <p class="text-gray-600">Price: {{ item.harga }}</p>
+    </div>
+    {% endfor %}
+</div>
+{%endblock%}
