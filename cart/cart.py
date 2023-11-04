@@ -34,7 +34,7 @@ class Cart(object):
         price = str(price)
 
         if produk_id not in self.cart:
-            self.cart[produk_id] = {'quantity':int(quantity),'id':produk_id,'price':price}
+            self.cart[produk_id] = {'quantity':int(quantity),'id':produk_id,'price':int(price)}
         elif update_produk:
             self.cart[produk_id]['quantity'] += int(quantity)
 
@@ -42,11 +42,16 @@ class Cart(object):
                 self.remove(produk_id)
 
         self.save()
+        print(self.cart)
 
     def remove(self,produk_id):
         if produk_id in self.cart:
             del self.cart[produk_id]
             self.save()
+    
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.session.modified = True
     
     def get_total_cost(self):
         for p in self.cart.keys():

@@ -89,6 +89,6 @@ def another_profile(request,user):
     gyat = User.objects.get(username=user)
     ff = Produk.objects.filter(created_by=gyat)
     return render(request, 'account/another_profile.html',{
-        'user':qck,
+        'uss':qck,
         'created_by':ff,
     })

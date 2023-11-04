@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from core.models import Produk
 
@@ -13,18 +14,29 @@ def cart_view(request):
     })
 
 @login_required
-def add_cart(request,pk):
-    cart = Cart(request)
-    produk = get_object_or_404(Produk,pk=pk)
-    price = produk.harga
-    mm = cart.add(produk_id=pk,price=price)
-    if mm:
+def add_pk(request,pk,price):
+    request.session['selected_product'] = {"pk":pk,'price':price}
+    return redirect('cart:checkout')
+
+@login_required
+def add_checkout(request):
+    selected_product = request.session.get('selected_product')
+
+    if selected_product:
+        pk = selected_product.get('pk')
+        price = selected_product.get('price')
+
+        cart = Cart(request)
+        cart.add(produk_id=pk,price=price)
+        
         messages.success(request, 'Produk berhasil ditambahkan ke keranjang.')
-    return redirect('cart:cart_view')
+    return render(request, 'cart/checkout.html',{
+        'cart': cart,
+    })
 
 @login_required
 def checkout(request,pk):
-    cart = Cart(request)
+    produk = Produk.objects.get(pk=pk)
     return render(request, 'cart/checkout.html',{
-        'qck': cart,
+        'qck': produk,
     })
