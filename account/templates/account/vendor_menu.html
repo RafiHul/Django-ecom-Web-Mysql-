@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {% for item in produk %}
+    <div class="bg-white p-4 shadow-md">
+        <!-- Tambahkan tautan ke halaman produk dengan URL yang sesuai -->
+        <a href="{% url 'items:detail' item.id %}">
+            <img src="{{ item.gambar.url }}" alt="{{ item.nama_barang }}" class="mx-auto mb-4">
+        </a>
+        <h2 class="text-xl font-semibold">{{ item.nama_barang }}</h2>
+        <p class="text-gray-600">Price: {{ item.harga }}</p>
+        <p class="text-gray-600">Jumlah: {{ item.jumlah }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
