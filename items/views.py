@@ -12,8 +12,8 @@ def detail(request,pk):
 
     if request.method == "POST":
         form = QuantityForm(request.POST)
-
-        if form.is_valid():
+        quantity2 = request.POST.get('jumlah')
+        if form.is_valid() and int(quantity2) <= int(produk.jumlah) and int(quantity2) != 0:
             quantity2 = request.POST.get('jumlah')
             quantity = int(quantity2)
             return add_pk(request,pk=pk,price=produk.harga,quantity=quantity)

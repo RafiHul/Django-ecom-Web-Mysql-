@@ -92,7 +92,8 @@ def another_profile(request,user):
         'uss':qck,
         'created_by':ff,
     })
-
+    
+@login_required
 def vendor_menu(request):
     produk = Produk.objects.filter(created_by=request.user)
     return render(request, 'account/vendor_menu.html',{
