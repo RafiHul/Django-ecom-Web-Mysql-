@@ -14,13 +14,11 @@ def cart_view(request):
 
 @login_required
 def add_pk(request,pk,price,quantity):
-    quantity = request.POST
-    print(pk,price,quantity)
     request.session['selected_product'] = {"pk":pk,'price':price,'quantity':quantity,'total':int(price) * int(quantity)}
     return redirect('cart:checkout')
 
 @login_required
-def add_checkout(request):
+def checkout_view(request):
     selected_product = request.session.get('selected_product')
 
     if selected_product:
@@ -33,6 +31,7 @@ def add_checkout(request):
     return render(request, 'cart/checkout.html',{
         'price': price,
         'total': total,
+        'quantity':quantity,
     })
 
 @login_required

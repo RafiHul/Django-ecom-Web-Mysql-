@@ -39,21 +39,24 @@
     </div>
 </div>
 <div id="beliSekarangPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
-    <form method="post" action="." enctype="multipart/form-data">
+    <form method="post" action=".">
         {% csrf_token %}
         <div class="bg-white p-4 rounded-md">
             <p>Berapa banyak yang ingin Anda beli?</p>
             {{ form.as_p }}
             <button type="submit" id="konfirmasiBeliButton" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Konfirmasi</button>
         </div>
+        <p id="errorText" class="text-red-500 mt-2 hidden">Masukkan jumlah yang valid (angka positif).</p>
     </form>    
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
     const beliSekarangButton = document.getElementById('beliSekarangButton');
     const beliSekarangPopup = document.getElementById('beliSekarangPopup');
     const konfirmasiBeliButton = document.getElementById('konfirmasiBeliButton');
     const jumlahBeli = document.getElementById('jumlahBeli');
+    const errorText = document.getElementById('errorText');
 
     beliSekarangButton.addEventListener('click', () => {
         beliSekarangPopup.classList.remove('hidden');
@@ -61,17 +64,22 @@
 
     konfirmasiBeliButton.addEventListener('click', () => {
         const jumlah = parseInt(jumlahBeli.value, 10);
-        if (!isNaN(jumlah) && jumlah > 0) {
-            const checkoutURL = "{% url 'items:detail' produk.id%}";
-    
-            window.location.href = checkoutURL;
-    
-            beliSekarangPopup.classList.add('hidden');
+        const jumlahProduk = parseInt('{{ produk.jumlah }}', 10);
+
+        if (isNaN(jumlah) || jumlah <= 0) {
+            errorText.style.display = 'block';
+        } else if (jumlah > jumlahProduk) {
+            errorText.style.display = 'block';
         } else {
-            alert('Masukkan jumlah yang valid (angka positif).');
+            errorText.style.display = 'none';
+            const checkoutURL = "{% url 'items:detail' produk.id %}";
+
+            window.location.href = checkoutURL;
+
+            beliSekarangPopup.classList.add('hidden');
         }
     });
-    
+});
 </script>
 
 {%endblock%}
