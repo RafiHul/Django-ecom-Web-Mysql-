@@ -4,7 +4,6 @@ from django.contrib import messages
 
 from .forms import NewItem, EditItem
 from core.models import Produk
-from cart.forms import QuantityForm
 from cart.views import add_pk
 
 def detail(request,pk):

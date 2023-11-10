@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from core.models import Produk
+from account.models import UserProfile
 from .cart import Cart
 
 @login_required
@@ -19,7 +20,9 @@ def add_pk(request,pk,price,quantity):
 
 @login_required
 def checkout_view(request):
+    dompet = UserProfile.objects.get(username_acc = request.user)
     selected_product = request.session.get('selected_product')
+    print(dompet.saldo)
 
     if selected_product:
         pk = selected_product.get('pk')
@@ -31,12 +34,6 @@ def checkout_view(request):
     return render(request, 'cart/checkout.html',{
         'price': price,
         'total': total,
-        'quantity':quantity,
-    })
-
-@login_required
-def checkout(request,pk):
-    produk = Produk.objects.get(pk=pk)
-    return render(request, 'cart/checkout.html',{
-        'qck': produk,
+        'quantity': quantity,
+        'dompet': dompet,
     })

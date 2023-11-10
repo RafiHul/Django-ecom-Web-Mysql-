@@ -55,8 +55,17 @@
             <span class="font-semibold">Total</span>
             <span>${{ total }}</span>
         </div>
-
+        {%if total < dompet.saldo%}
         <a href="#" class="inline-block px-8 py-4 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">Confirm checkout</a>
+        {%else%}
+        <div>
+            <button disabled class="inline-block px-8 py-4 rounded-xl bg-gray-500 cursor-not-allowed">Confirm checkout</button>
+        </div>
+        <div class="mt-2 text-red-500">
+            Saldo kurang, harap melakukan
+            <a href="{%url 'account:topup'%}" class="text-blue-500">topup</a>.
+        </div>
+        {%endif%}
     </div>
 </div>
 {% endblock %}
