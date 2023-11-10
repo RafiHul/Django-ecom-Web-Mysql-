@@ -22,7 +22,6 @@ def add_pk(request,pk,price,quantity):
 def checkout_view(request):
     dompet = UserProfile.objects.get(username_acc = request.user)
     selected_product = request.session.get('selected_product')
-    print(dompet.saldo)
 
     if selected_product:
         pk = selected_product.get('pk')
@@ -31,9 +30,28 @@ def checkout_view(request):
         total = selected_product.get('total')
         
         messages.success(request, 'Produk berhasil ditambahkan ke keranjang.')
+
     return render(request, 'cart/checkout.html',{
         'price': price,
         'total': total,
         'quantity': quantity,
         'dompet': dompet,
     })
+
+@login_required
+def checkout(request):
+    selected_product = request.session.get('selected_product')
+    dompet = UserProfile.objects.get(username_acc = request.user)
+    total = selected_product.get('total')
+    pk = selected_product.get('pk')
+    quantity = selected_product.get('quantity')
+    product = Produk.objects.get(pk=pk)
+
+    if selected_product:
+        if dompet.saldo >= total and quantity <= product.jumlah:
+            dompet.saldo -= int(total)
+            product.jumlah -= int(quantity)
+            product.save()
+            dompet.save()
+            return redirect('account:profile')
+        

@@ -55,8 +55,12 @@
             <span class="font-semibold">Total</span>
             <span>${{ total }}</span>
         </div>
+        <div class="mb-6 flex justify-between">
+            <span class="font-semibold">Balance in account</span>
+            <span>${{ dompet.saldo }}</span>
+        </div>
         {%if total < dompet.saldo%}
-        <a href="#" class="inline-block px-8 py-4 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">Confirm checkout</a>
+        <a href="{%url 'cart:confirmcheckout' %}" class="inline-block px-8 py-4 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">Confirm checkout</a>
         {%else%}
         <div>
             <button disabled class="inline-block px-8 py-4 rounded-xl bg-gray-500 cursor-not-allowed">Confirm checkout</button>

@@ -4,7 +4,6 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {% for item in produk %}
     <div class="bg-white p-4 shadow-md">
-        <!-- Tambahkan tautan ke halaman produk dengan URL yang sesuai -->
         <a href="{% url 'items:detail' item.id %}">
             <img src="{{ item.gambar.url }}" alt="{{ item.nama_barang }}" class="mx-auto mb-4">
         </a>

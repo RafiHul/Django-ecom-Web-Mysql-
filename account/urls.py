@@ -13,5 +13,5 @@ urlpatterns = [
     path('profile/topup/',views.topup,name='topup'),
     path('profile/settings/',views.settings,name='settings'),
     path('profile/vendor/',views.vendor_menu,name='vendor'),
-    path('profile/<str:user>/',views.another_profile,name='another_profile'),
+    path('profile/<str:user>',views.another_profile,name='another_profile'),
 ]
