@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 from core.models import Produk
 from account.models import UserProfile
+from .forms import Purchaseform
 from .cart import Cart
+from .models import Purchasehistory
 
 @login_required
 def cart_view(request):
@@ -22,20 +24,23 @@ def add_pk(request,pk,price,quantity):
 def checkout_view(request):
     dompet = UserProfile.objects.get(username_acc = request.user)
     selected_product = request.session.get('selected_product')
-
-    if selected_product:
-        pk = selected_product.get('pk')
-        price = selected_product.get('price')
-        quantity = selected_product.get('quantity')
-        total = selected_product.get('total')
+    total = selected_product.get('total')
+    quantity = selected_product.get('quantity')
+    pk = selected_product.get('pk')
+    if request.method == 'POST':
+        form = Purchaseform(request.POST)
+        if selected_product:
+            if form.is_valid():
+                print(total,pk,quantity)
+                form.save()
+                return redirect('cart:confirmcheckout')
+    else:
+        form = Purchaseform(initial={'quantity':quantity,'total_paid':total,"product_name":pk})
         
-        messages.success(request, 'Produk berhasil ditambahkan ke keranjang.')
-
     return render(request, 'cart/checkout.html',{
-        'price': price,
         'total': total,
-        'quantity': quantity,
         'dompet': dompet,
+        'form': form,
     })
 
 @login_required
@@ -54,4 +59,11 @@ def checkout(request):
             product.save()
             dompet.save()
             return redirect('account:profile')
+
+@login_required
+def history(request):
+    history = Purchasehistory.objects.filter(created_by=request.user)
+    return render(request, 'history/history.html',{
+        'history':history,
+    })
         
