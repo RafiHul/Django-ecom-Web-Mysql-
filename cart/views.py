@@ -29,10 +29,11 @@ def checkout_view(request):
     pk = selected_product.get('pk')
     if request.method == 'POST':
         form = Purchaseform(request.POST)
-        if selected_product:
-            if form.is_valid():
-                print(total,pk,quantity)
-                form.save()
+        if form.is_valid():
+            if selected_product:
+                purchasehistory = form.save(commit=False)
+                purchasehistory.created_by = request.user
+                purchasehistory.save()
                 return redirect('cart:confirmcheckout')
     else:
         form = Purchaseform(initial={'quantity':quantity,'total_paid':total,"product_name":pk})

@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'MyApp.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'kasir_database',
+		'NAME': 'ecommerce_databases',
 		'USER': 'kasir',
-		'PASSWORD': 'yes',
+		'PASSWORD': '@Kasirzz123',
 		'HOST':'localhost',
 		'PORT':'3306',
 	}

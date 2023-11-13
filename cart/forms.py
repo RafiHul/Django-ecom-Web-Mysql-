@@ -4,7 +4,6 @@ from .models import Purchasehistory
 CLASS_INPUT = "w-full p-5 rounded-xl"
 
 class Purchaseform(forms.ModelForm):
-    
     class Meta:
         model = Purchasehistory
         fields = ("first_name","last_name","address","zipcode","city","quantity","total_paid","product_name")
@@ -24,7 +23,4 @@ class Purchaseform(forms.ModelForm):
             "city": forms.TextInput(attrs={
                 "class": CLASS_INPUT
             }),
-            "quantity":forms.TextInput(),
-            "total_paid":forms.TextInput(),
-            "product_name":forms.TextInput()
         }
