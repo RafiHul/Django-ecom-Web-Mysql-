@@ -10,12 +10,12 @@
             </div>
             <div>
                 <h2 class="text-xl font-semibold">{{ profile.username_acc }}</h2>
-                <p class="text-gray-600">Saldo Dompet: {{profile.saldo}}</p>
+                <p class="text-gray-600">Balance: {{profile.saldo}}</p>
                 <a href="{%url 'account:topup'%}" class="text-blue-500 hover:underline block mb-2">Topup</a>
             </div>
         </div>
         <div class="mt-6">
-            <a href="{%url 'account:settings'%}" class="text-blue-500 hover:underline block mb-2">Pengaturan</a>
+            <a href="{%url 'account:settings'%}" class="text-blue-500 hover:underline block mb-2">Change Name</a>
             <a href="{%url 'cart:history'%}" class="text-blue-500 hover:underline block mb-2">History</a>
             <a href="#" class="text-blue-500 hover:underline block mb-2">Cart</a>
             <a href="{%url 'account:vendor'%}" class="text-blue-500 hover:underline block">Vendor Menu</a>

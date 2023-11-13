@@ -35,13 +35,19 @@ class SignupForm(UserCreationForm):
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if username.lower() in ['vendor','settings','topup','null']:
+            raise forms.ValidationError(f"nama pengguna {username} tidak di perbolehkan")
+        return username
+
 class TopupSaldo(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ("saldo",)
 
     saldo = forms.IntegerField(min_value=0,widget=forms.TextInput(attrs={
-        'placeholder': 'Masukkan jumlah saldo',
+        'placeholder': '....',
         'class': 'w-full border p-2 rounded-md'
     }))
 

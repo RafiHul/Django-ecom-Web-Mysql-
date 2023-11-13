@@ -6,3 +6,6 @@ def index(request):
     return render(request, 'core/index.html', {
         'produk': produk,
     })
+
+def aboutme(request):
+    return render(request,'core/aboutme.html')

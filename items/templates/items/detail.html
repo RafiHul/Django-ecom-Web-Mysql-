@@ -3,7 +3,7 @@
 {% block title %}{{ item.name }}{% endblock %}
 
 {%block h1%}
-    <h1>django Web</h1>
+    <h1>{{produk.nama_barang}}</h1>
 {%endblock%}
 
 {%block content%}
@@ -17,10 +17,10 @@
                 <h2 class="text-2xl font-semibold">{{produk.nama_barang}}</h2>
                 <p class="text-gray-600">{{produk.deskripsi}}</p>
                 <div class="mt-4">
-                    <p class="text-xl font-semibold">Harga: {{produk.harga}}</p>
-                    <p class="text-xl font-semibold">Jumlah: {{produk.jumlah}}</p>
+                    <p class="text-xl font-semibold">Price: {{produk.harga}}</p>
+                    <p class="text-xl font-semibold">Quantity: {{produk.jumlah}}</p>
                     <div class="mt-4">
-                        <p class="text-gray-600">Dijual oleh: <a href="{% url 'account:another_profile' produk.created_by %}" class="text-blue-500">{{ produk.created_by }}</a></p>
+                        <p class="text-gray-600">Selled by: <a href="{% url 'account:another_profile' produk.created_by %}" class="text-blue-500">{{ produk.created_by }}</a></p>
                     </div>
                 </div>
             </div>

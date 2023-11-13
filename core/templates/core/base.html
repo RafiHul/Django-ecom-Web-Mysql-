@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Aplikasi Belanja{% endblock %}</title>
+    <title>{% block title %}Welcome{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Tambahkan CSS untuk footer */
@@ -44,10 +44,9 @@
     <nav class="bg-gray-800 text-white py-2">
         <div class="container mx-auto">
             <ul class="flex justify-center space-x-4">
-                <li><a href="{% url 'core:index' %}" class="hover:text-blue-500">Beranda</a></li>
-                <li><a href="#" class="hover:text-blue-500">Kontak</a></li>
-                <li><a href="{% url 'items:new' %}" class="hover:text-blue-500">NewItem</a></li>
-                <li><a href="#" class="hover:text-blue-500">Dashboard</a></li>
+                <li><a href="{% url 'core:index' %}" class="hover:text-blue-500">Home</a></li>
+                <li><a href="{%url 'core:aboutme'%}" class="hover:text-blue-500">About</a></li>
+                <li><a href="{% url 'items:new' %}" class="hover:text-blue-500">Add Item</a></li>
             </ul>
         </div>
     </nav>
@@ -56,7 +55,7 @@
         {% endblock %}
     </div>
     <footer class="bg-gray-800 text-white text-center py-4">
-        &copy; Aplikasi Belanja 2023
+        &copy; Backend Web By Muhammad Rafihul Akhiroh
     </footer>
 </body>
 </html>
