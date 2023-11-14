@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('rafih/admoon/defender/',include('defender.urls')),
     path('rafih/admoon/', admin.site.urls),
     path('',include('core.urls')),
     path('',include('account.urls')),

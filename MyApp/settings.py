@@ -16,7 +16,7 @@ DEBUG = False
 CART_SESSION_ID = 'cart'
 SESSION_COOKIE_AGE = 86400
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'core:index'
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'account',
+    'defender',
     'cart',
     'items',
 ]
@@ -45,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'defender.middleware.FailedLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'MyApp.urls'
