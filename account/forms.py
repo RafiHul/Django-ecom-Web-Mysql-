@@ -37,7 +37,7 @@ class SignupForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        if username.lower() in ['vendor','settings','topup','null']:
+        if username.lower() in ['vendor','settings','topup','null','admin']:
             raise forms.ValidationError(f"nama pengguna {username} tidak di perbolehkan")
         return username
 
