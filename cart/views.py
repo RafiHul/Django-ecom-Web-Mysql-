@@ -27,21 +27,22 @@ def checkout_view(request):
     total = selected_product.get('total')
     quantity = selected_product.get('quantity')
     pk = selected_product.get('pk')
+    produk_instance = Produk.objects.get(pk=pk)
     if request.method == 'POST':
-        form = Purchaseform(request.POST)
-        if form.is_valid():
-            if selected_product:
-                purchasehistory = form.save(commit=False)
-                purchasehistory.created_by = request.user
-                purchasehistory.save()
-                return redirect('cart:confirmcheckout')
-    else:
-        form = Purchaseform(initial={'quantity':quantity,'total_paid':total,"product_name":pk})
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        address = request.POST.get('address')
+        zipcode = request.POST.get('address')
+        city = request.POST.get('city')
         
-    return render(request, 'cart/checkout.html',{
+        new_history = Purchasehistory.objects.create(product_name=produk_instance,first_name=first_name,last_name=last_name,quantity=quantity,address=address,zipcode=zipcode,city=city,total_paid=total,created_by=request.user)
+
+        if new_history:
+            return redirect('cart:confirmcheckout')
+        
+    return render(request, 'cart/checkoutpage.html',{
         'total': total,
-        'dompet': dompet,
-        'form': form,
+        'dompet': dompet
     })
 
 @login_required
@@ -59,7 +60,7 @@ def checkout(request):
             product.jumlah -= int(quantity)
             product.save()
             dompet.save()
-            return redirect('account:profile')
+            return redirect('cart:history')
 
 @login_required
 def history(request):

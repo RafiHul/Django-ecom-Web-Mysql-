@@ -5,8 +5,10 @@
 {%block content%}
 <h1 class="mb-6 text-3xl">{{ title }}</h1>
 
-<form method="post" action="{%url 'account:settings'%}">
+<form method="post" action="{% url 'account:settings' %}">
     {% csrf_token %}
+
+    <p class="mb-4 text-gray-600">Enter your new name</p>
 
     <div class="space-y-4">
         {{ form.username }}
@@ -22,6 +24,7 @@
         </div>
     {% endif %}
 
-    <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-gray">Submit</button>
+    <button class="mt-6 py-4 px-8 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-gray">Submit</button>
 </form>
+
 {%endblock%}

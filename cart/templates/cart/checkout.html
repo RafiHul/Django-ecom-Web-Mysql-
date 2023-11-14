@@ -14,26 +14,28 @@
                 {% csrf_token %}
                 <div class="mb-4">
                     <label class="inline-block mb-2">First Name</label>
-                    {{form.as_p}}
+                    {{form.first_name}}
                 </div>
                 
                 <div class="mb-4">
                     <label class="inline-block mb-2">Last Name</label>
+                    {{form.last_name}}
                 </div>
                 
                 <div class="mb-4">
                     <label class="inline-block mb-2">Address</label>
-
+                    {{form.address}}
                 </div>
 
                 <div class="flex space-x-6">
                     <div class="w-1/2 mb-4">
                         <label class="inline-block mb-2">Zip code</label>
-
+                        {{form.zipcode}}
                     </div>
 
                     <div class="w-1/2 mb-4">
                         <label class="inline-block mb-2">City/Place</label>
+                        {{form.zipcode}}
                     </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@
                     {% else %}
                     <form method="post" action="{% url 'items:detail' produk.id %}">
                         {% csrf_token %}
-                        <label for="jumlah">Jumlah:</label>
+                        <label for="jumlah">Quantity:</label>
                         <input type="number" id="jumlahBeli" name="jumlah" min="1" max="{{ produk.jumlah }}"value="1">
                         {%if produk.jumlah != 0%}
                         <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 w-full md:w-auto text-center md:text-left">Checkout</button>

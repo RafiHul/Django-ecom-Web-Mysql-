@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from .forms import SignupForm, TopupSaldo, EditProfileForm
+from .forms import SignupForm, TopupSaldo, EditProfileForm, EditImageForm
 from .models import UserProfile
 from core.models import Produk
 
@@ -73,7 +73,6 @@ def settings(request):
         form = EditProfileForm(request.POST,instance=request.user)
         
         if form.is_valid():
-            stored = form.cleaned_data['username']
             form.save()
             return redirect('account:profile')
 
@@ -99,3 +98,16 @@ def vendor_menu(request):
     return render(request, 'account/vendor_menu.html',{
         'produk':produk
     })
+
+@login_required
+def settingprofile(request):
+    uss_prof = get_object_or_404(UserProfile,username_acc=request.user)
+    if request.method == 'POST':
+        form = EditImageForm(request.POST,request.FILES,instance=uss_prof)
+        if form.is_valid():
+            form.save()
+            return redirect('account:profile')
+    else:
+        form = EditImageForm(instance=uss_prof)
+
+    return render(request, 'account/settingprofile.html',{'form':form})

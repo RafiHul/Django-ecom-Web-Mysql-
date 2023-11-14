@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from core.models import Produk
 
 class Purchasehistory(models.Model):
-    product_name = models.ForeignKey(Produk, related_name='produk_name', on_delete=models.CASCADE, db_column='product_name')
+    product_name = models.ForeignKey(Produk, related_name='product_name', on_delete=models.CASCADE, db_column='product_name')
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     quantity = models.IntegerField(blank=True)

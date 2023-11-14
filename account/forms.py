@@ -61,3 +61,13 @@ class EditProfileForm(UserChangeForm):
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
 
+class EditImageForm(forms.ModelForm):
+    
+    class Meta:
+        model = UserProfile
+        fields = ("gambar",)
+        widgets = {
+            "gambar":forms.FileInput(attrs={
+            'class': 'w-full py-4 px-6 rounded-xl'
+            })
+        }
