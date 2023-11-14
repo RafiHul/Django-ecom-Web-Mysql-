@@ -1,3 +1,4 @@
+sudo apt install pkg-config
 asgiref==3.7.2
 async-timeout==4.0.3
 Django==4.2.7
